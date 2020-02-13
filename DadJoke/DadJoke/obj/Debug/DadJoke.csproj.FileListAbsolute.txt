@@ -1,0 +1,14 @@
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\DadJoke.exe.config
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\DadJoke.exe
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\DadJoke.pdb
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\Newtonsoft.Json.dll
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Net.Http.Formatting.dll
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Web.Http.dll
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Web.Http.WebHost.dll
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\Newtonsoft.Json.xml
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Net.Http.Formatting.xml
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Web.Http.xml
+C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Web.Http.WebHost.xml
+C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.csproj.CopyComplete
+C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.exe
+C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.pdb
