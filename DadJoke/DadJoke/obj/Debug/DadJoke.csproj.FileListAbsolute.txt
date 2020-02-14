@@ -12,3 +12,4 @@ C:\Repository\codingchallenger\DadJoke\DadJoke\bin\Debug\System.Web.Http.WebHost
 C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.csproj.CopyComplete
 C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.exe
 C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.pdb
+C:\Repository\codingchallenger\DadJoke\DadJoke\obj\Debug\DadJoke.csprojAssemblyReference.cache
