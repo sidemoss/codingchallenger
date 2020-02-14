@@ -8,6 +8,10 @@ namespace DadJoke
 {
     class RandomJoke
     {
+        /// <summary>
+        /// Display random joke only.
+        /// </summary>
+        /// <param name="joke"></param>
         public static void DisplayRandomJoke(string joke)
         {
             Console.WriteLine("Random Joke");
