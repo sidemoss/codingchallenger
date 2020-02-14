@@ -7,9 +7,17 @@ using Newtonsoft.Json;
 
 namespace DadJoke
 {
+    /// <summary>
+    /// Keeping all api calls to icanhazdadjoke.com within the controller
+    /// </summary>
     class JokeController
     {
         static readonly HttpClient _client = new HttpClient();
+        /// <summary>
+        /// Decide between random joke or list of jokes by search. Random joke is chosen by supplying empty string.
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public static async Task RunAsync(string searchString)
         {
             // Update port # in the following line.
@@ -39,6 +47,10 @@ namespace DadJoke
 
             Console.ReadLine();
         }
+        /// <summary>
+        /// The api call to get a random joke. Just a call to the base address.
+        /// </summary>
+        /// <returns></returns>
         static async Task<Joke> GetRandomJoke()
         {
             Joke joke = null;
@@ -50,7 +62,13 @@ namespace DadJoke
             }
             return joke;
         }
-
+        /// <summary>
+        /// The api call to get a list of dad jokes based on a search string.
+        /// Limit has been hardcoded as 30 jokes
+        /// Deserialize has to deal with a nested object which contains the jokes json inside results key. 
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         static async Task<List<Joke>> GetJokesBySearch(string searchString)
         {
             List<Joke> jokes = null;
