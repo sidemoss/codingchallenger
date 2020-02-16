@@ -67,7 +67,7 @@ namespace DadJoke
                 {
                     buildWord += c;
                 }
-                else if (c == ' ' && buildWord.Length > 0)
+                else if ((c == ' ' || c == '\n') && buildWord.Length > 0)
                 {
                     wordCount++;
                     buildWord = string.Empty;
