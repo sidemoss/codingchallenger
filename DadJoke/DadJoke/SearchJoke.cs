@@ -34,15 +34,16 @@ namespace DadJoke
 
             Console.WriteLine("\nGroup 1 -- < 10");
             Console.WriteLine("===============");
-            FilterGroup1();
+            
+            WriteJokesFromGroup(FilterGroupLowEnd(10));
 
             Console.WriteLine("\nGroup 2 -- >= 10 and < 20");
             Console.WriteLine("=========================");
-            FilterGroup2();
+            WriteJokesFromGroup(FilterGroupBetween(10, 20));
 
             Console.WriteLine("\nGroup 3 -- >= 20");
             Console.WriteLine("================");
-            FilterGroup3();
+            WriteJokesFromGroup(FilterGroupHighEnd(20));
 
         }
         /// <summary>
@@ -135,45 +136,38 @@ namespace DadJoke
         /// Used linq to filter query for joke word count less than 10. And display it.
         /// Appended word count to make testing easier
         /// </summary>
-        private static void FilterGroup1()
+        private static IEnumerable<JokeData> FilterGroupLowEnd(int lowEnd)
         {
-            var group1 = from jokeData in _jokeDataList
-                         where jokeData.WordCount < 10
-                         select new { joke = jokeData.Joke, wordCount = jokeData.WordCount };
-            
-            foreach (var group in group1)
-            {
-                Console.WriteLine($"{ group.joke} ({group.wordCount})\n");
-            }
-        }
-        /// <summary>
-        /// Used linq to filter query for joke word count less than 20. And display it.
-        /// Appended word count to make testing easier
-        /// </summary>
-        private static void FilterGroup2()
-        {
-            var group2 = from jokeData in _jokeDataList
-                         where jokeData.WordCount >= 10 && jokeData.WordCount < 20
-                         select new { joke = jokeData.Joke, wordCount = jokeData.WordCount };
+            IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
+                where jokeData.WordCount < lowEnd 
+                select jokeData;
 
-            foreach (var group in group2)
-            {
-                Console.WriteLine($"{ group.joke} ({group.wordCount})\n");
-            }
+            return groupData;
         }
-        /// <summary>
-        /// Used linq to filter query for joke word count more than 19. And display it.
-        /// Appended word count to make testing easier
-        /// </summary>
-        private static void FilterGroup3()
-        {
-            var group3 = from jokeData in _jokeDataList
-                         where jokeData.WordCount >= 20
-                         select new { joke = jokeData.Joke, wordCount = jokeData.WordCount };
 
-            foreach (var group in group3)
+        private static IEnumerable<JokeData> FilterGroupBetween(int lowEnd, int highEnd)
+        {
+            IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
+                                              where jokeData.WordCount >= lowEnd && jokeData.WordCount < highEnd
+                                              select jokeData;
+
+            return groupData;
+        }
+
+        private static IEnumerable<JokeData> FilterGroupHighEnd(int highEnd)
+        {
+            IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
+                                              where jokeData.WordCount >= highEnd
+                                              select jokeData;
+
+            return groupData;
+        }
+
+        private static void WriteJokesFromGroup(IEnumerable<JokeData> group)
+        {
+            foreach (var groupData in group)
             {
-                Console.WriteLine($"{ group.joke} ({group.wordCount})\n");
+                Console.WriteLine($"{ groupData.Joke} ({groupData.WordCount})\n");
             }
         }
     }
