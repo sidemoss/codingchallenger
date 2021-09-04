@@ -31,8 +31,16 @@ namespace DadJoke
                 if (!string.IsNullOrEmpty(searchString))
                 {
                     //Call get list of jokes with search string.
-                    List<Joke> jokeList = await GetJokesBySearch(searchString);
-                    SearchJoke.RunJokeSearch(jokeList, searchString);                }
+                    //List<Joke> jokeList = await GetJokesBySearch(searchString);
+
+                    var response = await CallBySearch(searchString);
+                    if (response.IsSuccessStatusCode)
+					{
+                        var json = GetJsonFromResponse(response);
+                        IEnumerable<Joke> jokeList = (IEnumerable<Joke>)GetJokes(json.Result);
+                        SearchJoke.RunJokeSearch(jokeList, searchString);
+                    }
+                }
                 else
                 {
                     //Call random joke
@@ -69,20 +77,44 @@ namespace DadJoke
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
-        static async Task<List<Joke>> GetJokesBySearch(string searchString)
+        //static async Task<IEnumerable<Joke>> GetJokesBySearch(string searchString)
+        //{
+        //    IEnumerable<Joke> jokes = null;
+        //    var response = await _client.GetAsync(BuildSearchUrl(searchString));
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var jsonString = await response.Content.ReadAsStringAsync();
+        //        var jsonJokes = JsonConvert.DeserializeObject<JokeAttributes>(jsonString);
+        //        jokes = jsonJokes.results;
+        //    }
+        //    return jokes;
+        //}
+
+
+        static async Task<HttpResponseMessage> CallBySearch(string searchString)
         {
-            List<Joke> jokes = null;
-            HttpResponseMessage response = await _client.GetAsync(_client.BaseAddress.ToString() +
+            return await _client.GetAsync(BuildSearchUrl(searchString));
+        }
+
+        static async Task<string> GetJsonFromResponse(HttpResponseMessage response)
+        {
+            return await response.Content.ReadAsStringAsync();
+        }
+
+
+        static IEnumerable<Joke> GetJokes(string jsonString)
+        {
+            return JsonConvert.DeserializeObject<JokeAttributes>(jsonString).results;
+        }
+
+
+        private static string BuildSearchUrl(string searchString)
+		{
+            return _client.BaseAddress.ToString() +
                 "search?term=" +
                 searchString +
-                "&limit=30");
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonString = await response.Content.ReadAsStringAsync();
-                JokeAttributes jsonJokes = JsonConvert.DeserializeObject<JokeAttributes>(jsonString);
-                jokes = jsonJokes.results;
-            }
-            return jokes;
+                "&limit=30";
         }
     }
 }

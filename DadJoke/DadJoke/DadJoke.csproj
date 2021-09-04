@@ -55,8 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JokeController.cs" />
-    <Compile Include="JokeData.cs" />
+    <Compile Include="Model\Joke.cs" />
+    <Compile Include="Model\JokeAttributes.cs" />
+    <Compile Include="Controller\JokeController.cs" />
+    <Compile Include="Model\JokeData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomJoke.cs" />

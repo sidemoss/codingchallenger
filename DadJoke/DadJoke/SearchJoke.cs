@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DadJoke
 {
@@ -15,17 +16,19 @@ namespace DadJoke
         /// </summary>
         /// <param name="jokeList"></param>
         /// <param name="searchString"></param>
-        public static void RunJokeSearch(List<Joke> jokeList, string searchString)
+        public static void RunJokeSearch(IEnumerable<Joke> jokeList, string searchString)
         {
             foreach (Joke dadJoke in jokeList)
             {
                 string jokeWithUpperSearch = GetNewJokeStringWithUpperSearch(dadJoke.joke, searchString);
                 int wordCount = GetWordCountFromJoke(jokeWithUpperSearch);
+                int wordArrayCount = GetWordCountFromJokeSimple(jokeWithUpperSearch);
                 JokeData jokeData = new JokeData
                 {
                     Id = dadJoke.id,
                     Joke = jokeWithUpperSearch,
-                    WordCount = wordCount
+                    WordCount = wordCount,
+                    WordArrayCount = wordArrayCount
                 };
 
                 _jokeDataList.Add(jokeData);
@@ -35,7 +38,7 @@ namespace DadJoke
             Console.WriteLine("\nGroup 1 -- < 10");
             Console.WriteLine("===============");
             
-            WriteJokesFromGroup(FilterGroupLowEnd(10));
+            WriteJokesFromGroup(FilterGroupLowEndMethodSyntax(10));
 
             Console.WriteLine("\nGroup 2 -- >= 10 and < 20");
             Console.WriteLine("=========================");
@@ -85,6 +88,15 @@ namespace DadJoke
 
             return wordCount;
         }
+
+        private static int GetWordCountFromJokeSimple(string joke)
+        {
+            string[] wordArray = joke.Split('\n', ' ');
+
+            return wordArray.Length;
+        }
+
+
         /// <summary>
         /// Start with converting joke and search strings to lower case. Then, to look specifically for the search string
         /// within the joke string. During testing, the icanhazdadjoke.com api was not case sensitive but the string.Replace() 
@@ -138,11 +150,18 @@ namespace DadJoke
         /// </summary>
         private static IEnumerable<JokeData> FilterGroupLowEnd(int lowEnd)
         {
-            IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
+            IEnumerable<JokeData> groupData = 
+                from jokeData in _jokeDataList
                 where jokeData.WordCount < lowEnd 
                 select jokeData;
 
             return groupData;
+        }
+
+        private static IEnumerable<JokeData> FilterGroupLowEndMethodSyntax(int lowEnd)
+        {
+            IEnumerable<JokeData> query = _jokeDataList.Where(jokeData => jokeData.WordCount < lowEnd);
+            return query;
         }
 
         private static IEnumerable<JokeData> FilterGroupBetween(int lowEnd, int highEnd)
@@ -167,7 +186,7 @@ namespace DadJoke
         {
             foreach (var groupData in group)
             {
-                Console.WriteLine($"{ groupData.Joke} ({groupData.WordCount})\n");
+                Console.WriteLine($"{ groupData.Joke} ({groupData.WordCount}) ArrayCount: ({groupData.WordArrayCount})\n");
             }
         }
     }

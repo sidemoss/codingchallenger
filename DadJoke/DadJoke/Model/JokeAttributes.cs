@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DadJoke
 {
-    public class JokeData
-    {
-        public string Id { get; set; }
-        public string Joke { get; set; }
-        public int WordCount { get; set; }
-    }
-
-    public class JokeAttributes
+	public class JokeAttributes
     {
         public string current_page { get; set; }
         public string limit { get; set; }
@@ -21,11 +18,4 @@ namespace DadJoke
         public string total_jokes { get; set; }
         public string total_pages { get; set; }
     }
-
-    public class Joke
-    {
-        public string id { get; set; }
-        public string joke { get; set; }
-    }
-
 }
