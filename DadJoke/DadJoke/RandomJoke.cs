@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace DadJoke
 {
-    class RandomJoke
+    class RandomJoke : IDisplayJoke
     {
-        /// <summary>
-        /// Display random joke only.
-        /// </summary>
-        /// <param name="joke"></param>
-        public static void DisplayRandomJoke(string joke)
-        {
+        private readonly string _joke;
+		public RandomJoke(string joke)
+		{
+            _joke = joke;
+		}
+
+        public void WriteJokes()
+		{
             Console.WriteLine("Random Joke");
             Console.WriteLine("===========");
             Console.WriteLine();
-            Console.WriteLine(joke);
+            Console.WriteLine(_joke);
         }
     }
 }

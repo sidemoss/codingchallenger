@@ -5,8 +5,13 @@ using System.Threading.Tasks;
 
 namespace DadJoke
 {
-    class SearchJoke
+    public class SearchJoke : IDisplayJoke
     {
+		public SearchJoke()
+		{
+
+		}
+
         private static readonly List<JokeData> _jokeDataList = new List<JokeData>();
         /// <summary>
         /// Loops through the joke list finding the keyword and uppercasing it on each joke.
@@ -34,10 +39,12 @@ namespace DadJoke
                 _jokeDataList.Add(jokeData);
                 
             }
+        }
 
+        public void WriteJokes()
+		{
             Console.WriteLine("\nGroup 1 -- < 10");
             Console.WriteLine("===============");
-            
             WriteJokesFromGroup(FilterGroupLowEndMethodSyntax(10));
 
             Console.WriteLine("\nGroup 2 -- >= 10 and < 20");
@@ -47,8 +54,8 @@ namespace DadJoke
             Console.WriteLine("\nGroup 3 -- >= 20");
             Console.WriteLine("================");
             WriteJokesFromGroup(FilterGroupHighEnd(20));
-
         }
+
         /// <summary>
         /// Takes the joke string and iterates through each character to get the word count.
         /// Decided to use letters and digits only to constitute words and spaces to indicate the end of a word.

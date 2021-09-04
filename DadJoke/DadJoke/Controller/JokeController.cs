@@ -37,7 +37,7 @@ namespace DadJoke
                     if (response.IsSuccessStatusCode)
 					{
                         var json = GetJsonFromResponse(response);
-                        IEnumerable<Joke> jokeList = (IEnumerable<Joke>)GetJokes(json.Result);
+                        var jokeList = (IEnumerable<Joke>)GetJokes(json.Result);
                         SearchJoke.RunJokeSearch(jokeList, searchString);
                     }
                 }
@@ -45,7 +45,8 @@ namespace DadJoke
                 {
                     //Call random joke
                     Joke randomJoke = await GetRandomJoke();
-                    RandomJoke.DisplayRandomJoke(randomJoke.joke);
+                    IDisplayJoke displayJoke = new RandomJoke(randomJoke.joke);
+                    displayJoke.WriteJokes();
                 }
             }
             catch (Exception e)
@@ -92,22 +93,20 @@ namespace DadJoke
         //}
 
 
-        static async Task<HttpResponseMessage> CallBySearch(string searchString)
+        private static async Task<HttpResponseMessage> CallBySearch(string searchString)
         {
             return await _client.GetAsync(BuildSearchUrl(searchString));
         }
 
-        static async Task<string> GetJsonFromResponse(HttpResponseMessage response)
+        private static async Task<string> GetJsonFromResponse(HttpResponseMessage response)
         {
             return await response.Content.ReadAsStringAsync();
         }
 
-
-        static IEnumerable<Joke> GetJokes(string jsonString)
+        private static IEnumerable<Joke> GetJokes(string jsonString)
         {
             return JsonConvert.DeserializeObject<JokeAttributes>(jsonString).results;
         }
-
 
         private static string BuildSearchUrl(string searchString)
 		{
