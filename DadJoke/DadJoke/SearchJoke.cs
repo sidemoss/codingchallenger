@@ -45,7 +45,12 @@ namespace DadJoke
 		{
             Console.WriteLine("\nGroup 1 -- < 10");
             Console.WriteLine("===============");
+<<<<<<< HEAD
             WriteJokesFromGroup(FilterGroupLowEndMethodSyntax(10));
+=======
+            
+            WriteJokesFromGroup(FilterGroupLowEnd(10));
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
 
             Console.WriteLine("\nGroup 2 -- >= 10 and < 20");
             Console.WriteLine("=========================");
@@ -54,6 +59,10 @@ namespace DadJoke
             Console.WriteLine("\nGroup 3 -- >= 20");
             Console.WriteLine("================");
             WriteJokesFromGroup(FilterGroupHighEnd(20));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
         }
 
         /// <summary>
@@ -157,20 +166,27 @@ namespace DadJoke
         /// </summary>
         private static IEnumerable<JokeData> FilterGroupLowEnd(int lowEnd)
         {
+<<<<<<< HEAD
             IEnumerable<JokeData> groupData = 
                 from jokeData in _jokeDataList
+=======
+            IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
                 where jokeData.WordCount < lowEnd 
                 select jokeData;
 
             return groupData;
         }
 
+<<<<<<< HEAD
         private static IEnumerable<JokeData> FilterGroupLowEndMethodSyntax(int lowEnd)
         {
             IEnumerable<JokeData> query = _jokeDataList.Where(jokeData => jokeData.WordCount < lowEnd);
             return query;
         }
 
+=======
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
         private static IEnumerable<JokeData> FilterGroupBetween(int lowEnd, int highEnd)
         {
             IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
@@ -185,15 +201,26 @@ namespace DadJoke
             IEnumerable<JokeData> groupData = from jokeData in _jokeDataList
                                               where jokeData.WordCount >= highEnd
                                               select jokeData;
+<<<<<<< HEAD
 
             return groupData;
         }
 
+=======
+
+            return groupData;
+        }
+
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
         private static void WriteJokesFromGroup(IEnumerable<JokeData> group)
         {
             foreach (var groupData in group)
             {
+<<<<<<< HEAD
                 Console.WriteLine($"{ groupData.Joke} ({groupData.WordCount}) ArrayCount: ({groupData.WordArrayCount})\n");
+=======
+                Console.WriteLine($"{ groupData.Joke} ({groupData.WordCount})\n");
+>>>>>>> 17f116aaa34270e856800e5e81474b77b7576df4
             }
         }
     }

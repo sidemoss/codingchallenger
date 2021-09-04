@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayJoke.cs" />
+    <Compile Include="IDisplayJoke.cs" />
     <Compile Include="Model\Joke.cs" />
     <Compile Include="Model\JokeAttributes.cs" />
     <Compile Include="Controller\JokeController.cs" />
